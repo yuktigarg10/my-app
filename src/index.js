@@ -1,17 +1,41 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import { useState } from "react";
+import ReactDOM from "react-dom";
+import "./styles.css";
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+function App() {
+  const [number1, setNumber1] = useState(0);
+  const [number2, setNumber2] = useState(0);
+  const [total, setTotal] = useState(number1 + number2);
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+  function calculateTotal() {
+    setTotal(number1 + number2);
+  }
+
+  return (
+    <div className="App">
+      <h1>Adding Two Numbers</h1>
+
+      <div className="number-inputs">
+        <input
+          type="number"
+          value={number1}
+          onChange={(e) => setNumber1(+e.target.value)}
+          placeholder="0"
+        />
+        <input
+          type="number"
+          value={number2}
+          onChange={(e) => setNumber2(+e.target.value)}
+          placeholder="0"
+        />
+      </div>
+
+      <button onClick={calculateTotal}>Add Them!</button>
+
+      <h2>{total}</h2>
+    </div>
+  );
+}
+
+const rootElement = document.getElementById("root");
+ReactDOM.render(<App />, rootElement);
